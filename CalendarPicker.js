@@ -7,13 +7,12 @@
 class CalendarPicker {
     constructor(element, options) {
         // Core variables.
-        this.day = new Date().getDay()
-        this.month = new Date().getMonth();
-        this.year = new Date().getFullYear();
-
-        // The date used for calculation, starts as today.
         this.date = new Date();
-        this._formatDateToInit(this.date)
+        this._formatDateToInit(this.date);
+
+        this.day = this.date.getDay()
+        this.month = this.date.getMonth();
+        this.year = this.date.getFullYear();
 
         // Storing the todays date for practical reasons.
         this.today = this.date;
@@ -147,7 +146,7 @@ class CalendarPicker {
 
         this.calendarGrid.addEventListener('keydown', (keyEvent) => {
             if (keyEvent.key !== 'Enter') return;
-            
+
             handleSelectedElement(keyEvent);
         }, false);
     }

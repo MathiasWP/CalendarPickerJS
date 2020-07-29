@@ -7,11 +7,7 @@ The simple and pretty way to let a user select a day!
 &nbsp;
 
 ### NPM:
-
 #### `npm install calendarpickerjs`
 
-&nbsp;
-
 ### CDN:
-
-#### `<script src="https://cdn.jsdelivr.net/npm/calendarpickerjs@1.0.1"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/calendarpickerjs@1.1.0"></script>`
