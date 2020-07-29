@@ -82,7 +82,6 @@ class CalendarPicker {
         this.nextMonthArrow.id = 'next-month';
 
         this._insertHeaderIntoCalendarWrapper();
-
         this._insertCalendarGridDaysHeader();
         this._insertDaysIntoGrid();
         this._insertNavigationButtons();
@@ -148,7 +147,7 @@ class CalendarPicker {
 
         this.calendarGrid.addEventListener('keydown', (keyEvent) => {
             if (keyEvent.key !== 'Enter') return;
-
+            
             handleSelectedElement(keyEvent);
         }, false);
     }
