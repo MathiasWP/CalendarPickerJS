@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./CalendarPicker.style.css">
+    <style>
+        body {
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myCalendar {
+            width: 40rem;
+        }
+
+        #example {
+            width: 100vw;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myCalendar"></div>
+    <div id="example">
+        <h3>Currently selected date: <span id="current-date"></span></h3>
+    </div>
+</body>
+
+<script src="CalendarPicker.js"></script>
+<script>
+    const nextYear = new Date().getFullYear() + 1;
+    const calendar = new CalendarPicker('#myCalendar', {
+        /**
+         * If max < min or min > max then the only available day will be today.
+         */
+        min: new Date(),
+        max: new Date(nextYear, 10) // NOTE: new Date(nextYear, 10) is "Sun Nov 01 <NextYear>"
+    });
+
+
+    const currentDateElement = document.getElementById('current-date');
+    currentDateElement.textContent = calendar.value;
+
+    calendar.onValueChange((value) => {
+        currentDateElement.textContent = value;
+        console.log(value);
+    })
+</script>
+
+</html>
