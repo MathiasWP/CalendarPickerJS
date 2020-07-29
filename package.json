@@ -1,5 +1,5 @@
 {
-  "name": "calendarpicker",
+  "name": "calendarpickerjs",
   "version": "1.0.0",
   "description": "The simple and pretty way to let a user select a day!",
   "main": "CalendarPicker.js",

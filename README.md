@@ -10,7 +10,7 @@ The simple and pretty way to let a user select a day!
 
 ### With NPM 📦:
 
-#### `npm install calendarpicker`
+#### `npm install calendarpickerjs`
 
 &nbsp;
 
