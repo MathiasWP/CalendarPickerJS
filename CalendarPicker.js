@@ -98,7 +98,7 @@ class CalendarPicker {
      * @author Juan Mendes - 30th October 2012.
      */
     _getDaysInMonth = (month, year) => {
-        if (!month || !year) return;
+        if ((!month && month !== 0) || (!year && year !== 0)) return;
 
         const date = new Date(year, month, 1);
         const days = [];
@@ -181,7 +181,7 @@ class CalendarPicker {
      */
     _insertNavigationButtons = () => {
         // Ugly long string, but at least the svg is pretty.
-        const arrowSvg = '<svg viewBox="0 0 466.678 466.678" xmlns="http://www.w3.org/2000/svg"><path d="m411.631 240.58-171.093 222.552c-1.714 2.234-4.386 3.546-7.196 3.546-2.825 0-5.482-1.312-7.196-3.546l-171.108-222.552c-1.253-1.638-1.882-3.582-1.882-5.539 0-1.921.605-3.848 1.835-5.467 2.444-3.257 6.783-4.472 10.578-2.979l113.3 44.757-.013-262.273c.012-5.018 4.067-9.079 9.091-9.079h90.774c5.024 0 9.079 4.061 9.091 9.079l-.012 262.273 113.298-44.763c3.8-1.492 8.139-.278 10.592 2.985 2.459 3.263 2.448 7.767-.059 11.006z"/></svg>';
+        const arrowSvg = '<svg enable-background="new 0 0 386.257 386.257" viewBox="0 0 386.257 386.257" xmlns="http://www.w3.org/2000/svg"><path d="m0 96.879 193.129 192.5 193.128-192.5z"/></svg>';
 
         this.previousMonthArrow.innerHTML = arrowSvg;
         this.nextMonthArrow.innerHTML = arrowSvg;
@@ -227,7 +227,6 @@ class CalendarPicker {
         this.calendarGrid.innerHTML = '';
 
         let arrayOfDays = this._getDaysInMonth(this.month, this.year);
-
         let firstDayOfMonth = arrayOfDays[0].getDay();
 
         // Converting Sunday (0 when using getDay()) to 7 to make it easier to work with.
