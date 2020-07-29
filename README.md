@@ -16,4 +16,4 @@ The simple and pretty way to let a user select a day!
 
 #### With CDN:
 
-#### `<script src="https://cdn.jsdelivr.net/npm/calendarpickerjs@1.0.0"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/calendarpickerjs@1.0.1"></script>`
