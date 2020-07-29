@@ -132,7 +132,7 @@ class CalendarPicker {
                 // Removes the 'selected' class from all elements that have it.
                 Array.from(document.querySelectorAll('.selected')).forEach(element => element.classList.remove('selected'));
 
-                // Adds the 'selected'-class to the selected date.
+                // Adds the 'selected'-class on the date clicked.
                 event.target.classList.add('selected');
 
                 this.value = event.target.value;
@@ -217,9 +217,8 @@ class CalendarPicker {
 
     /**
      * @description Adds all the days for current month into the calendar-grid.
-     * Takes into account which day the month starts on, so that "empty/placeholder" days can be added
-     * in case the month for example starts on a Thursday.
-     * Also disables the days that are not within the provided.
+     * Takes into account which day the month starts on, so that "empty/placeholder" days can be added in case the month for example starts on a Thursday.
+     * Also disables the days that are not within the provided range.
      */
     _insertDaysIntoGrid = () => {
         this.calendarGrid.innerHTML = '';
