@@ -6,14 +6,14 @@ The simple and pretty way to let a user select a day!
 
 &nbsp;
 
-## **_How do i install CalendarPickerJS?_**
+### **_How do i install CalendarPickerJS?_**
 
-### With NPM 📦:
+#### With NPM:
 
 #### `npm install calendarpickerjs`
 
 &nbsp;
 
-### With CDN 🌐:
+#### With CDN:
 
-#### `<script src="https://cdn.jsdelivr.net/npm/calendarpicker@1.0.0"></script>`
+#### `<script src="https://cdn.jsdelivr.net/npm/calendarpickerjs@1.0.0"></script>`
