@@ -1,7 +1,7 @@
 /**
- * @class CalendarPicker
+ * @class CalendarPicker.
  * @description Provides a simple way to get a minimalistic calender in your DOM.
- * @author Mathias Picker - 29 July 2020
+ * @author Mathias Picker - 29 July 2020.
  */
 
 class CalendarPicker {
@@ -18,10 +18,10 @@ class CalendarPicker {
         // Storing the todays date for practical reasons.
         this.today = this.date;
 
-        // The calendars value should always be the current date
+        // The calendars value should always be the current date.
         this.value = this.date;
 
-        // Ranges for the calendar (optional)
+        // Ranges for the calendar (optional).
         this.min = options.min;
         this.max = options.max;
         this._formatDateToInit(this.min)
@@ -95,7 +95,7 @@ class CalendarPicker {
      * @param {Number} The month number, 0 based.
      * @param {Number} The year, not zero based, required to account for leap years.
      * @return {Array<Date>} List with date objects for each day of the month.
-     * @author Juan Mendes - 30th October 2012
+     * @author Juan Mendes - 30th October 2012.
      */
     _getDaysInMonth = (month, year) => {
         if (!month || !year) return;
@@ -111,7 +111,7 @@ class CalendarPicker {
     }
 
     /**
-     * @param {DateObject} date 
+     * @param {DateObject} date.
      * @description Sets the clock of a date to 00:00:00 to be consistent.
      */
     _formatDateToInit = (date) => {
@@ -120,8 +120,7 @@ class CalendarPicker {
     }
 
     /**
-     * @description Inserts the calendar into the wrapper +
-     * adds eventListeners for the calender-grid.
+     * @description Inserts the calendar into the wrapper and adds eventListeners for the calender-grid.
      */
     _insertCalendarIntoWrapper = () => {
         this.calendarWrapper.appendChild(this.calendarElement);
@@ -222,7 +221,7 @@ class CalendarPicker {
      * @description Adds all the days for current month into the calendar-grid.
      * Takes into account which day the month starts on, so that "empty/placeholder" days can be added
      * in case the month for example starts on a Thursday.
-     * Also disables the days that are not within the provided 
+     * Also disables the days that are not within the provided.
      */
     _insertDaysIntoGrid = () => {
         this.calendarGrid.innerHTML = '';
@@ -257,7 +256,7 @@ class CalendarPicker {
             this.calendarGrid.appendChild(dateElement);
         })
 
-        this.calendarElement.appendChild(this.calendarGrid)
+        this.calendarElement.appendChild(this.calendarGrid);
         this.activeDateElement.classList.add('selected');
     }
 
