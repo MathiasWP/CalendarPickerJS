@@ -132,7 +132,7 @@ class CalendarPicker {
                 // Removes the 'selected' class from all elements that have it.
                 Array.from(document.querySelectorAll('.selected')).forEach(element => element.classList.remove('selected'));
 
-                // Adds the 'selected'-class on the date clicked.
+                // Adds the 'selected'-class to the selected date.
                 event.target.classList.add('selected');
 
                 this.value = event.target.value;
@@ -149,31 +149,6 @@ class CalendarPicker {
 
             handleSelectedElement(keyEvent);
         }, false);
-
-
-        this.calendarGrid.addEventListener('animationend', () => {
-            this._resetCalendarAnimations();
-
-            if (this.goingToPrevious) {
-                this.calendarGrid.classList.add('swoosh-down-reverse');
-                this.goingToPrevious = false;
-                this._insertDaysIntoGrid();
-            }
-            if (this.goingToNext) {
-                this.calendarGrid.classList.add('swoosh-up-reverse');
-                this.goingToNext = false;
-                this._insertDaysIntoGrid();
-            }
-
-        }, false);
-
-    }
-
-    _resetCalendarAnimations = () => {
-        this.calendarGrid.classList.remove('swoosh-up');
-        this.calendarGrid.classList.remove('swoosh-up-reverse');
-        this.calendarGrid.classList.remove('swoosh-down');
-        this.calendarGrid.classList.remove('swoosh-down-reverse');
     }
 
     /**
@@ -212,15 +187,10 @@ class CalendarPicker {
         this.previousMonthArrow.setAttribute('aria-label', 'Go to previous month');
         this.nextMonthArrow.setAttribute('aria-label', 'Go to next month');
 
-        this.previousMonthArrow.tabIndex = 0;
-        this.nextMonthArrow.tabIndex = 0;
-
         this.navigationWrapper.appendChild(this.previousMonthArrow);
         this.navigationWrapper.appendChild(this.nextMonthArrow);
 
         this.navigationWrapper.addEventListener('click', (clickEvent) => {
-            this._resetCalendarAnimations();
-
             if (clickEvent.target.closest(`#${this.previousMonthArrow.id}`)) {
                 if (this.month === 0) {
                     this.month = 11;
@@ -247,8 +217,9 @@ class CalendarPicker {
 
     /**
      * @description Adds all the days for current month into the calendar-grid.
-     * Takes into account which day the month starts on, so that "empty/placeholder" days can be added in case the month for example starts on a Thursday.
-     * Also disables the days that are not within the provided range.
+     * Takes into account which day the month starts on, so that "empty/placeholder" days can be added
+     * in case the month for example starts on a Thursday.
+     * Also disables the days that are not within the provided.
      */
     _insertDaysIntoGrid = () => {
         this.calendarGrid.innerHTML = '';
@@ -291,7 +262,6 @@ class CalendarPicker {
      * given by the navigation. Also updates the UI with the new values.
      */
     _updateCalendar = () => {
-        this.previousDate = this.date;
         this.date = new Date(this.year, this.month);
 
         [this.dayAsText, this.monthAsText, this.dateAsText, this.yearAsText] = this.date.toString().split(' ');
@@ -301,15 +271,7 @@ class CalendarPicker {
 
         window.requestAnimationFrame(() => {
             this.calendarHeaderTitle.textContent = `${this.listOfAllMonthsAsText[this.month]} - ${this.year}`;
-
-            if (this.previousDate < this.date) {
-                this.calendarGrid.classList.add('swoosh-up');
-                this.goingToPrevious = true;
-            } else {
-                this.calendarGrid.classList.add('swoosh-down');
-                this.goingToNext = true;
-            }
-
+            this._insertDaysIntoGrid();
         })
     }
 
