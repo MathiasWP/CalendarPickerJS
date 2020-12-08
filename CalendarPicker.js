@@ -1,9 +1,21 @@
+// Polyfill for Element.prototype.closest (for IE 9+)
+if (!Element.prototype.matches) { Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector; }
+if (!Element.prototype.closest) {
+    Element.prototype.closest = function(s) {
+      var el = this;
+      do {
+        if (Element.prototype.matches.call(el, s)) return el;
+        el = el.parentElement || el.parentNode;
+      } while (el !== null && el.nodeType === 1);
+      return null;
+    };
+}
+
 /**
  * @class CalendarPicker.
  * @description Provides a simple way to get a minimalistic calender in your DOM.
  * @author Mathias Picker - 29 July 2020.
  */
-
 function CalendarPicker(element, options) {
     // Core variables.
     this.date = new Date();
@@ -167,7 +179,7 @@ CalendarPicker.prototype._insertCalendarIntoWrapper = function () {
  * @description Adds the "main" calendar-header.
  */
 CalendarPicker.prototype._insertHeaderIntoCalendarWrapper = function () {
-    this.calendarHeaderTitle.textContent = `${this.listOfAllMonthsAsText[this.month]} - ${this.year}`;
+    this.calendarHeaderTitle.textContent = this.listOfAllMonthsAsText[this.month] + ' - ' + this.year;
     this.calendarHeader.appendChild(this.calendarHeaderTitle);
     this.calendarWrapper.appendChild(this.calendarHeader);
 }
@@ -205,7 +217,7 @@ CalendarPicker.prototype._insertNavigationButtons = function () {
     // Cannot use arrow-functions for IE support :(
     var that = this;
     this.navigationWrapper.addEventListener('click', function (clickEvent) {
-        if (clickEvent.target.closest(`#${that.previousMonthArrow.id}`)) {
+        if (clickEvent.target.closest('#' + that.previousMonthArrow.id)) {
             if (that.month === 0) {
                 that.month = 11;
                 that.year -= 1;
@@ -215,7 +227,7 @@ CalendarPicker.prototype._insertNavigationButtons = function () {
             that._updateCalendar();
         }
 
-        if (clickEvent.target.closest(`#${that.nextMonthArrow.id}`)) {
+        if (clickEvent.target.closest('#' + that.nextMonthArrow.id)) {
             if (that.month === 11) {
                 that.month = 0;
                 that.year += 1;
@@ -263,7 +275,7 @@ CalendarPicker.prototype._insertDaysIntoGrid = function () {
             dateElement.value = date;
         }
 
-        dateElement.textContent = date ? `${Date}` : '';
+        dateElement.textContent = date ? Date : '';
         this.calendarGrid.appendChild(dateElement);
     })
 
@@ -287,7 +299,7 @@ CalendarPicker.prototype._updateCalendar = function () {
     // Cannot use arrow-functions for IE support :(
     var that = this;
     window.requestAnimationFrame(function () {
-        that.calendarHeaderTitle.textContent = `${that.listOfAllMonthsAsText[that.month]} - ${that.year}`;
+        that.calendarHeaderTitle.textContent = that.listOfAllMonthsAsText[that.month] + ' - ' + that.year;
         that._insertDaysIntoGrid();
     })
 }
