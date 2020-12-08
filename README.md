@@ -1,9 +1,9 @@
 # CalendarPickerJS
 
 The simple and pretty way to let a user select a day!
-Supports all major browser.
-Entirely written in Vanilla JavaScript with no dependencies.
-Has a reactive "onValueChange" listener that can be used to fire any code everytime the date changes.
+- Supports all major browser.
+- Entirely written in Vanilla JavaScript with no dependencies.
+- Has a reactive "onValueChange" callback that can be used to everytime the date changes.
 
 [Live demo](https://mathiaspicker.com/CalendarPickerJS)
 
