@@ -56,7 +56,7 @@ function CalendarPicker(element, options) {
     this.calendarDayElementType = 'time';
 
     // Hard-coded list of all days.
-    this.listOfAllDaysAsText = [
+    this.listOfAllDaysAsText = options.listOfAllDaysAsText ? options.listOfAllDaysAsText : [
         'Monday',
         'Tuesday',
         'Wednesday',
@@ -67,7 +67,7 @@ function CalendarPicker(element, options) {
     ];
 
     // Hard-coded list of all months.
-    this.listOfAllMonthsAsText = [
+    this.listOfAllMonthsAsText = options.listOfAllMonthsAsText ? options.listOfAllMonthsAsText : [
         'January',
         'February',
         'March',
@@ -312,4 +312,3 @@ CalendarPicker.prototype.onValueChange = function (callback) {
     if (this.callback) return this.callback(this.value);
     this.callback = callback;
 }
-
