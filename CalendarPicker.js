@@ -20,8 +20,8 @@ function CalendarPicker(element, options) {
     // Core variables.
     this.date = options.date ?
         new Date(Math.min(
-            options.max || new Date(9999, 0),
-            Math.max(options.min || null, options.date))
+            options.max || Infinity,
+            Math.max(options.min || 0, options.date))
         ) : new Date();
     this._formatDateToInit(this.date);
 
