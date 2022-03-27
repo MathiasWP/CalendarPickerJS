@@ -1,3 +1,45 @@
+@keyframes swoosh-up {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0.1;
+        transform: translateY(0.8em);
+    }
+
+}
+
+@keyframes swoosh-down {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0.1;
+        transform: translateY(-0.8em);
+    }
+
+}
+
+.swoosh-up {
+    animation: swoosh-up 100ms ;
+}
+
+.swoosh-up-reverse {
+    animation: swoosh-up 100ms reverse;
+}
+
+.swoosh-down {
+    animation: swoosh-down 100ms ;
+}
+
+.swoosh-down-reverse {
+    animation: swoosh-down 100ms reverse;
+}
+
 #calendar-wrapper {
     width: 100%;
     display: grid;
