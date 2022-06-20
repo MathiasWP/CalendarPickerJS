@@ -136,3 +136,7 @@
     transform: rotate(180deg);
 }
 
+#calendar #navigation-wrapper button[disabled] svg {
+    cursor: not-allowed;
+    fill: rgba(30, 39, 51, 0.2);
+}

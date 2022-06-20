@@ -203,6 +203,8 @@ CalendarPicker.prototype._insertNavigationButtons = function () {
     this.previousMonthArrow.setAttribute('aria-label', 'Go to previous month');
     this.nextMonthArrow.setAttribute('aria-label', 'Go to next month');
 
+    this._toggleNavigationButtons();
+
     this.navigationWrapper.appendChild(this.previousMonthArrow);
     this.navigationWrapper.appendChild(this.nextMonthArrow);
 
@@ -231,6 +233,19 @@ CalendarPicker.prototype._insertNavigationButtons = function () {
     }, false)
 
     that.calendarElement.appendChild(that.navigationWrapper);
+}
+
+CalendarPicker.prototype._beginningOfMonth = function(date) {
+    return new Date(date.getFullYear(), date.getMonth())
+}
+
+CalendarPicker.prototype._endOfMonth = function(date) {
+    return new Date(date.getFullYear(), date.getMonth() + 1);
+}
+
+CalendarPicker.prototype._toggleNavigationButtons = function() {
+    this.previousMonthArrow.toggleAttribute('disabled', !!this.min && this._beginningOfMonth(this.date) <= this.min);
+    this.nextMonthArrow.toggleAttribute('disabled', !!this.max && this._endOfMonth(this.date) >= this.max);
 }
 
 /**
@@ -287,6 +302,7 @@ CalendarPicker.prototype._updateCalendar = function () {
     this.day = this.date.getDay();
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
+    this._toggleNavigationButtons();
 
     // Cannot use arrow-functions for IE support :(
     var that = this;
