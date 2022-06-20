@@ -142,7 +142,7 @@ CalendarPicker.prototype._setDateText = function () {
 }
 
 /**
- * @description Inserts the calendar into the wrapper and adds eventListeners for the calender-grid.
+ * @description Inserts the calendar into the wrapper and adds eventListeners for the calendar-grid.
  */
 CalendarPicker.prototype._insertCalendarIntoWrapper = function () {
     this.calendarWrapper.appendChild(this.calendarElement);
@@ -154,7 +154,7 @@ CalendarPicker.prototype._insertCalendarIntoWrapper = function () {
         if (event.target.nodeName.toLowerCase() === this.calendarDayElementType && !event.target.classList.contains('disabled')) {
 
             // Removes the 'selected' class from all elements that have it.
-            Array.from(document.querySelectorAll('.selected')).forEach(element => element.classList.remove('selected'));
+            Array.from(this.calendarGrid.querySelectorAll('.selected')).forEach(element => element.classList.remove('selected'));
 
             // Adds the 'selected'-class to the selected date.
             event.target.classList.add('selected');
