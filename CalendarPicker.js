@@ -18,27 +18,25 @@ if (!Element.prototype.closest) {
  */
 function CalendarPicker(element, options) {
     // Core variables.
-    this.date = options.date ?
+    var date = options.date ?
         new Date(Math.min(options.max || Infinity,
             Math.max(options.min || -Infinity, options.date))
         ) : new Date();
-    this._formatDateToInit(this.date);
+    this.date = this._truncateTime(date);
 
     this.day = this.date.getDay()
     this.month = this.date.getMonth();
     this.year = this.date.getFullYear();
 
     // Storing the todays date for practical reasons.
-    this.today = this.date;
+    this.today = this._truncateTime(new Date());
 
     // The calendars value should always be the current date.
     this.value = this.date;
 
     // Ranges for the calendar (optional).
-    this.min = options.min;
-    this.max = options.max;
-    this._formatDateToInit(this.min);
-    this._formatDateToInit(this.max);
+    this.min = this._truncateTime(options.min);
+    this.max = this._truncateTime(options.max);
 
     // Element to insert calendar in.
     this.userElement = document.querySelector(element);
@@ -124,12 +122,13 @@ CalendarPicker.prototype._getDaysInMonth = function (month, year) {
 }
 
 /**
- * @param {DateObject} date.
- * @description Sets the clock of a date to 00:00:00 to be consistent.
+ * @param {Date} date.
+ * @return {Date} new date with time set to 00:00:00.
+ * @description Sets the time of a date to 00:00:00 to be consistent.
  */
-CalendarPicker.prototype._formatDateToInit = function (date) {
+CalendarPicker.prototype._truncateTime = function (date) {
     if (!date) return;
-    date.setHours(0, 0, 0);
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate())
 }
 
 /**
