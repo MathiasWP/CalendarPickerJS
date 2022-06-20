@@ -3,7 +3,7 @@
 The simple and pretty way to let a user select a day!
 - Supports all major browser.
 - Entirely written in Vanilla JavaScript with no dependencies.
-- Has a reactive "onValueChange" callback that can be used to everytime the date changes.
+- Has a reactive "onValueChange" callback that can be used everytime the date changes.
 
 [Live demo](https://mathiaspicker.com/CalendarPickerJS)
 

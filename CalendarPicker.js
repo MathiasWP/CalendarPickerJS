@@ -57,7 +57,7 @@ function CalendarPicker(element, options) {
 
     var beginningOfYearOnMonday = new Date('2018-01-01');
     var locale = options.locale || 'en-US';
-    this.listOfAllDaysAsText = [...Array(7).keys()].map(this._toTranslatedWeekday(beginningOfYearOnMonday, locale))
+    this.listOfAllDaysAsText = [...Array(7).keys()].map(this._toTranslatedWeekday(beginningOfYearOnMonday, locale, options.showShortWeekdays))
     this.listOfAllMonthsAsText = [...Array(12).keys()].map(this._toTranslatedMonth(beginningOfYearOnMonday, locale))
 
     // Creating the calendar
@@ -78,16 +78,17 @@ function CalendarPicker(element, options) {
     this.userElement.appendChild(this.calendarWrapper);
 }
 
-CalendarPicker.prototype._toTranslatedWeekday = function(beginningOfYearOnMonday, locale) {
+CalendarPicker.prototype._toTranslatedWeekday = function(beginningOfYearOnMonday, locale, showShortWeekdays) {
+    var weekdayFormat = showShortWeekdays ? 'short' : 'long'
     return function(dayOfWeekIndex) {
-        return new Intl.DateTimeFormat(locale, { weekday: 'long'})
+        return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat })
             .format(new Date(beginningOfYearOnMonday.getFullYear(), beginningOfYearOnMonday.getMonth(), beginningOfYearOnMonday.getDate() + dayOfWeekIndex))
     }
 }
 
 CalendarPicker.prototype._toTranslatedMonth = function(beginningOfYearOnMonday, locale) {
     return function(monthIndex) {
-        return new Intl.DateTimeFormat(locale, { month: 'long'})
+        return new Intl.DateTimeFormat(locale, { month: 'long' })
             .format(new Date(beginningOfYearOnMonday.getFullYear(), beginningOfYearOnMonday.getMonth() + monthIndex, beginningOfYearOnMonday.getDate()))
     }
 }
