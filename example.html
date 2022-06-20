@@ -161,7 +161,9 @@
         <pre>const myCalender = new CalendarPicker('<span class="pink">#myCalendarWrapper</span>', {</pre>
         <pre>   // If max < min or min > max then the only available day will be today.</pre>
         <pre>   min: new Date(),</pre>
-        <pre>   max: new Date(nextYear, 10) // NOTE: new Date(nextYear, 10) is "Sun Nov 01 nextYear"</pre>
+        <pre>   max: new Date(nextYear, 10), // NOTE: new Date(nextYear, 10) is "Nov 01 nextYear"</pre>
+        <pre>   locale: 'en-US', // Can be any locale or language code supported by Intl.DateTimeFormat, defaults to 'en-US'</pre>
+        <pre>   showShortWeekdays: false // Can be used to fit calendar onto smaller (mobile) screens, defaults to false</pre>
         <pre>});</pre>
         <pre> </pre>
         <pre>const currentDateElement = document.getElementById('current-date');</pre>
@@ -197,7 +199,9 @@
     const myCalender = new CalendarPicker('#myCalendarWrapper', {
         // If max < min or min > max then the only available day will be today.
         min: new Date(),
-        max: new Date(nextYear, 10) // NOTE: new Date(nextYear, 10) is "Sun Nov 01 <nextYear>"
+        max: new Date(nextYear, 10), // NOTE: new Date(nextYear, 10) is "Nov 01 <nextYear>"
+        locale: 'en-US', // Can be any locale or language code supported by Intl.DateTimeFormat, defaults to 'en-US'
+        showShortWeekdays: false // Can be used to fit calendar onto smaller (mobile) screens, defaults to false
     });
 
     const currentDateElement = document.getElementById('current-date');

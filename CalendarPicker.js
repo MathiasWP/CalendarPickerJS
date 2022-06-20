@@ -55,32 +55,10 @@ function CalendarPicker(element, options) {
     this.calendarGrid = document.createElement('section');
     this.calendarDayElementType = 'time';
 
-    // Hard-coded list of all days.
-    this.listOfAllDaysAsText = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-    ];
-
-    // Hard-coded list of all months.
-    this.listOfAllMonthsAsText = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
+    var beginningOfYearOnMonday = new Date('2018-01-01');
+    var locale = options.locale || 'en-US';
+    this.listOfAllDaysAsText = [...Array(7).keys()].map(this._toTranslatedWeekday(beginningOfYearOnMonday, locale, options.showShortWeekdays))
+    this.listOfAllMonthsAsText = [...Array(12).keys()].map(this._toTranslatedMonth(beginningOfYearOnMonday, locale))
 
     // Creating the calendar
     this.calendarWrapper.id = 'calendar-wrapper';
@@ -100,6 +78,20 @@ function CalendarPicker(element, options) {
     this.userElement.appendChild(this.calendarWrapper);
 }
 
+CalendarPicker.prototype._toTranslatedWeekday = function(beginningOfYearOnMonday, locale, showShortWeekdays) {
+    var weekdayFormat = showShortWeekdays ? 'short' : 'long'
+    return function(dayOfWeekIndex) {
+        return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat })
+            .format(new Date(beginningOfYearOnMonday.getFullYear(), beginningOfYearOnMonday.getMonth(), beginningOfYearOnMonday.getDate() + dayOfWeekIndex))
+    }
+}
+
+CalendarPicker.prototype._toTranslatedMonth = function(beginningOfYearOnMonday, locale) {
+    return function(monthIndex) {
+        return new Intl.DateTimeFormat(locale, { month: 'long' })
+            .format(new Date(beginningOfYearOnMonday.getFullYear(), beginningOfYearOnMonday.getMonth() + monthIndex, beginningOfYearOnMonday.getDate()))
+    }
+}
 
 /**
  * @param {Number} The month number, 0 based.
