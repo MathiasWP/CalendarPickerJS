@@ -38,6 +38,15 @@
     animation: swoosh-down 100ms reverse;
 }
 
+@media (prefers-reduced-motion) {
+    .swoosh-up,
+    .swoosh-up-reverse,
+    .swoosh-down,
+    .swoosh-down-reverse {
+      animation: none;
+    }
+}
+
 #calendar-wrapper {
     width: 100%;
     display: grid;
