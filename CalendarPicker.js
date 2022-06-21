@@ -165,7 +165,28 @@ CalendarPicker.prototype._insertCalendarIntoWrapper = function () {
 
         handleSelectedElement(keyEvent);
     }, false);
+
+    this.calendarGrid.addEventListener('animationend', () => {
+        this._resetCalendarAnimations();
+
+        if (this.goingToPrevious) {
+            this.calendarGrid.classList.add('swoosh-down-reverse');
+            this.goingToPrevious = false;
+            this._insertDaysIntoGrid();
+        }
+        if (this.goingToNext) {
+            this.calendarGrid.classList.add('swoosh-up-reverse');
+            this.goingToNext = false;
+            this._insertDaysIntoGrid();
+        }
+
+    }, false);
 }
+
+CalendarPicker.prototype._resetCalendarAnimations = function() {
+    this.calendarGrid.classList.remove('swoosh-up', 'swoosh-up-reverse', 'swoosh-down', 'swoosh-down-reverse');
+}
+
 
 /**
  * @description Adds the "main" calendar-header.
@@ -211,6 +232,8 @@ CalendarPicker.prototype._insertNavigationButtons = function () {
     // Cannot use arrow-functions for IE support :(
     var that = this;
     this.navigationWrapper.addEventListener('click', function (clickEvent) {
+        that._resetCalendarAnimations();
+
         if (clickEvent.target.closest('#' + that.previousMonthArrow.id)) {
             if (that.month === 0) {
                 that.month = 11;
@@ -295,6 +318,7 @@ CalendarPicker.prototype._insertDaysIntoGrid = function () {
  * given by the navigation. Also updates the UI with the new values.
  */
 CalendarPicker.prototype._updateCalendar = function () {
+    this.previousDate = this.date;
     this.date = new Date(this.year, this.month);
 
     this._setDateText();
@@ -309,6 +333,14 @@ CalendarPicker.prototype._updateCalendar = function () {
     window.requestAnimationFrame(function () {
         that.calendarHeaderTitle.textContent = that.listOfAllMonthsAsText[that.month] + ' - ' + that.year;
         that._insertDaysIntoGrid();
+
+        if (that.previousDate < that.date) {
+            that.calendarGrid.classList.add('swoosh-up');
+            that.goingToPrevious = true;
+        } else {
+            that.calendarGrid.classList.add('swoosh-down');
+            that.goingToNext = true;
+        }
     })
 }
 
